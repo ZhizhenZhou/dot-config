@@ -1,4 +1,4 @@
-if [ "$USER" = "zhizhenzhou" ] || ["$USER" = "zzz"]; then
+if [ "$USER" = "zhizhenzhou" ] || [ "$USER" = "zzz"]; then
   PROMPT=''
 else
   PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m '
