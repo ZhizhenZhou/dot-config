@@ -1,17 +1,13 @@
 #!/bin/sh
 
-set -e
+# set -e
 
 print_error() {
-  printf '%sError: %s%s\n' "$*" >&2
-}
-
-command_exists() {
-  command -v "$@" >/dev/null 2>&1
+  printf '\033[31mError\033[0m: %s\n' "$*" >&2
 }
 
 if [ "${SHELL#*zsh}" != "$SHELL" ]; then
-    if command -v omz; then
+    if [ -d ${ZSH:-~/.oh-my-zsh} ]; then
         if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
             git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
         else
@@ -46,11 +42,12 @@ if [ "${SHELL#*zsh}" != "$SHELL" ]; then
         #     echo "export VISUAL='nvim'"
         # } >> ${HOME:-~}/.zshrc
     else
-        echo "please install oh-my-zsh first."
+        print_error "please install oh-my-zsh first."
+        exit 1
     fi
 else
-    echo "please set zsh your default shell."
+    print_error "please set zsh as your default shell."
     exit 1
 fi
 
-sh -c ${HOME:-~}/.zshrc
+# . ${HOME:-~}/.zshrc
