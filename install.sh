@@ -55,7 +55,8 @@ command_exists() {
 #     print_error "zsh is not installed."
 # fi
 
-if [[ "$SHELL" == *"/zsh" ]]; then
+if [ "${SHELL#*zsh}" != "$SHELL" ]; then
+# if [[ "$SHELL" == *"/zsh" ]]; then
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || {
             echo "ohmyzsh install fail."
