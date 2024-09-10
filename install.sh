@@ -11,7 +11,7 @@ command_exists() {
 }
 
 if [ "${SHELL#*zsh}" != "$SHELL" ]; then
-    if ! command_exists omz; then
+    if which omz; then
         if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
             git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
         else
@@ -53,5 +53,4 @@ else
     exit 1
 fi
 
-source ${HOME:-~}/.zshrc
-
+sh -c ${HOME:-~}/.zshrc
