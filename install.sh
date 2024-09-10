@@ -23,7 +23,7 @@ if command_exists zsh; then
             print_error "you have \`zsh $zsh_version\` installed. But \`oh-my-zsh\` needs \`zsh 5.0.8\` or more recent."
         fi
     else
-        chsh -s $(which zsh)
+        sudo chsh -s $(which zsh)
     fi
 
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
