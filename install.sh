@@ -16,6 +16,7 @@ if command_exists zsh; then
         zsh_version=$(zsh --version | awk '{print $2}')
         required_version="5.0.8"
         if [ "$(printf '%s\n' "$required_version" "$zsh_version" | sort -V | head -n1)" = "$required_version" ]; then
+            echo "$zsh_version"
             if ! command_exists omz; then
                 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
             fi
@@ -26,6 +27,8 @@ if command_exists zsh; then
         sudo chsh -s $(which zsh)
     fi
 
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
