@@ -18,7 +18,7 @@ if command_exists zsh; then
         if [ "$(printf '%s\n' "$required_version" "$zsh_version" | sort -V | head -n1)" = "$required_version" ]; then
             if ! command_exists omz; then
                 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-            
+            fi
         else
             print_error "you have \`zsh $zsh_version\` installed. But \`oh-my-zsh\` needs \`zsh 5.0.8\` or more recent."
         fi
