@@ -5,4 +5,4 @@ Then use command `chsh -s $(which zsh)` make it the default shell.
 ## Install `oh-my-zsh`
 Use command `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"` to install `oh-my-zsh`.
 ## Import config
-Use command `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/zsh-config/main/install.sh)"` to import my own configuration.
+Use command `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/zsh/install.sh)"` to import my own configuration.
