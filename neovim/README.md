@@ -23,10 +23,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/mai
 
 And then restart your shell(`zsh`).  
 ## Install Nerd Font (if you have done this before, you can pass it.)
-Enter https://www.nerdfonts.com/font-downloads, download a `Nerd Font`. (I'm using `Hack Nerd Font`.)  
+Download a [`Nerd Font`](https://www.nerdfonts.com/font-downloads). (I'm using `Hack Nerd Font`.)  
 ## Install node.js (if you have done this before, you can pass it.)
-Install `node.js` to make sure lsp work well.  
-Follow the link https://nodejs.org/zh-cn/download/package-manager to install `node.js`. (I'm using `v20.17.0(LTS)`.)  
+Install [`node.js`](https://nodejs.org/zh-cn/download/package-manager) to make sure lsp work well. (I'm using `v20.17.0(LTS)`.)  
 ## import neovim config
 make sure you have the path `~/.config/nvm/`, then 
 ```
