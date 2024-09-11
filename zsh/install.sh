@@ -8,27 +8,21 @@ print_error() {
 
 if [ "${SHELL#*zsh}" != "$SHELL" ]; then
     if [ -d ${ZSH:-~/.oh-my-zsh} ]; then
-        if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
-            git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-        else
+        if [ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
             rm -rf ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-            git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
         fi
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
         if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
-            git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-        else
             rm -rf ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-            git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
         fi
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
         # 安装自定义的zsh主题
         if [ ! -f ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/zzz.zsh-theme ]; then
-            curl -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/zzz.zsh-theme https://raw.githubusercontent.com/ZhizhenZhou/zsh-config/main/zzz.zsh-theme
-        else
             rm -f ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/zzz.zsh-theme
-            curl -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/zzz.zsh-theme https://raw.githubusercontent.com/ZhizhenZhou/zsh-config/main/zzz.zsh-theme
         fi
+        curl -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/zzz.zsh-theme https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/zsh/zzz.zsh-theme
 
         sed -i 's/ZSH_THEME=".*"/ZSH_THEME="zzz"/g' ${HOME:-~}/.zshrc
         sed -i 's/plugins=(.*)/plugins=(zsh-syntax-highlighting zsh-autosuggestions z git)/g' ${HOME:-~}/.zshrc
