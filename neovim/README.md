@@ -16,7 +16,10 @@ sudo ln -s /usr/local/nvim/bin/nvim /usr/bin/nvim
 ```
 Then you can use `nvim` command globally.
 <br><br>
-After successfully install `neovim`, run command `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/neovim/nvim_config.sh)"`.
+After successfully install `neovim`, run command 
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/neovim/nvim_config.sh)"
+```
 
 And then restart your shell(`zsh`).  
 ## Install Nerd Font (if you have done this before, you can pass it.)
