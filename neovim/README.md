@@ -28,4 +28,7 @@ Enter https://www.nerdfonts.com/font-downloads, download a `Nerd Font`. (I'm usi
 Install `node.js` to make sure lsp work well.  
 Follow the link https://nodejs.org/zh-cn/download/package-manager to install `node.js`. (I'm using `v20.17.0(LTS)`.)  
 ## import neovim config
-make sure you have the path `~/.config/nvm/`, then run command `git clone git@github.com:ZhizhenZhou/neovim-config.git $HOME/.config/nvim/`.
+make sure you have the path `~/.config/nvm/`, then 
+```
+git clone https://github.com/ZhizhenZhou/neovim-config.git $HOME/.config/nvim/
+```
