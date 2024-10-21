@@ -1,0 +1,23 @@
+Host alias
+    HostName hostname
+    User user
+
+Host gateway
+    HostName gateway.cs.cityu.edu.hk
+    User zhizhzhou6
+    IdentityFile ~/.ssh/id_rsa
+
+Host 620a
+    HostName ss620a.cs.cityu.edu.hk
+    User zhouzhizhen
+    IdentityFile ~/.ssh/id_rsa
+    ProxyCommand ssh -W %h:%p gateway
+
+Host 620b
+    HostName ss620b.cs.cityu.edu.hk
+    User platform
+    ProxyCommand ssh -W %h:%p gateway
+
+Host chat
+    HostName devzat.hackclub.com
+    User zzz
