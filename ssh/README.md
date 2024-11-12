@@ -9,9 +9,9 @@ Then append local `~/.ssh/id_rsa.pub` to remote file `~/.ssh/authorized_keys`.
 
 Now import configuration.
 ```
-curl -L0 ~/.ssh/ https://raw.githubusercontent.com/ZhizhenZhou/dot-config/refs/heads/main/ssh/config
+curl -L -o ~/.ssh/config https://raw.githubusercontent.com/ZhizhenZhou/dot-config/refs/heads/main/ssh/config
 ```
 
 ```
-curl -L0 ~/ https://raw.githubusercontent.com/ZhizhenZhou/dot-config/refs/heads/main/ssh/autossh.sh
+curl -L -o ~/autossh.sh https://raw.githubusercontent.com/ZhizhenZhou/dot-config/refs/heads/main/ssh/autossh.sh
 ```
