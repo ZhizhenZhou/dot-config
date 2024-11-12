@@ -1,6 +1,6 @@
 # Neovim config
 ## Install Neovim
-Since we need `neovim >= 0.8`, some package manager(apt...) only have older version. So I recommand to download and install `neovim` manually. Here's the offical [instroduction](https://github.com/neovim/neovim/releases).
+Since we need `neovim >= 0.10.0`, some package manager(apt...) only have older version. So I recommand to download and install `neovim` manually. Here's the offical [instroduction](https://github.com/neovim/neovim/releases).
 <br><br>
 Here's a example to install `neovim` on Linux (`wsl` as well).  
 I prefer use `Tarball` rather than `AppImage`, so I download file `nvim-linux64.tar.gz` (below any folders you want).  
