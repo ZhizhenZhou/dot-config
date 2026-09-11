@@ -1,0 +1,15 @@
+# 真实 SSH 配置：只保留模板 config.example 在仓库里
+ssh/config
+
+# 密钥与密码材料
+*.pem
+*.key
+id_*
+!*.pub
+*pass*
+*.enc
+# 文档不该被上面的通配符误伤（如 passwordless 指南）
+!*.md
+
+# 操作系统噪声
+.DS_Store

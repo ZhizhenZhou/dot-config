@@ -1,0 +1,63 @@
+# ~/.ssh/config —— 模板
+#
+# 用法：复制成 ~/.ssh/config，把所有 <...> 替换成你自己的值。
+# 真实主机名 / 账号 / 密钥路径不要提交进 git。
+#
+# 说明：IdentityFile 沿用 RSA 是因为这是既有环境；新建仓的话建议
+#   ssh-keygen -t ed25519 -C "you@example.com"
+# 并把下面的路径换成 id_ed25519。
+
+Host <alias>
+    HostName <actual-hostname>
+    User <username>
+
+
+# ---------------------------------------------------------------------------
+# 跳板机（公网可达）
+# ---------------------------------------------------------------------------
+Host gateway
+    HostName <gateway-hostname>
+    User <username>
+    IdentityFile ~/.ssh/id_rsa
+    ServerAliveInterval 120
+    ServerAliveCountMax 5
+    SetEnv TERM=xterm-256color
+
+
+# ---------------------------------------------------------------------------
+# 内网机器：经 gateway 跳转，用密钥登录
+# ---------------------------------------------------------------------------
+Host work-a
+    HostName <work-a-hostname>
+    User <username>
+    IdentityFile ~/.ssh/id_rsa
+    ProxyCommand ssh -W %h:%p gateway
+    SetEnv TERM=xterm-256color
+
+
+# ---------------------------------------------------------------------------
+# 内网机器：只有密码登录，且是多人共享账号
+#   -> 用 ControlMaster 复用首连，后续秒连（配合 SSH_ASKPASS，见 README）
+# ---------------------------------------------------------------------------
+Host work-b
+    HostName <work-b-hostname>
+    User <shared-account>
+    ProxyCommand ssh -W %h:%p gateway
+    ControlMaster auto
+    ControlPath ~/.ssh/control-%r@%h:%p
+    ControlPersist yes
+    ServerAliveInterval 120
+    ServerAliveCountMax 5
+    TCPKeepAlive yes
+    SetEnv TERM=xterm-256color
+
+
+# ---------------------------------------------------------------------------
+# HPC 集群
+# ---------------------------------------------------------------------------
+Host hpc
+    HostName <hpc-hostname>
+    User <username>
+    IdentityFile ~/.ssh/id_rsa
+    ProxyCommand ssh -W %h:%p gateway
+    SetEnv TERM=xterm-256color
