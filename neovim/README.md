@@ -16,6 +16,7 @@
 | neovim | >= 0.10（实测 0.12） | — |
 | git | 系统源即可 | 克隆配置与插件 |
 | gcc + make | 系统源即可（WSL: `sudo apt install build-essential`） | treesitter 编译语法解析器，缺了首开报错 |
+| unzip | 系统源即可（WSL: `sudo apt install unzip`） | mason 安装 zip 格式的工具包（stylua / clangd 等），缺了这些工具会安装失败 |
 | ripgrep | 系统源即可（WSL: `sudo apt install ripgrep`） | telescope 全文搜索 |
 | node.js | >= 20（任意活跃 LTS，如 20/22/24） | LSP 运行时 |
 | [Nerd Font](https://www.nerdfonts.com/font-downloads)（Hack） | 任意 | 图标 |
@@ -23,6 +24,16 @@
 ## Quick start
 
 ### 1. 安装 neovim
+
+Linux/WSL 先装齐系统依赖（一条命令）：
+
+```bash
+sudo apt install -y build-essential unzip ripgrep
+```
+
+> `build-essential`（gcc/make）供 treesitter 编译解析器，`unzip` 供 mason 解压 zip 格式的工具包
+> （stylua / clangd 等；缺了时报 `spawn: unzip failed`，不看文档很难联想到），
+> `ripgrep` 供 telescope 全文搜索。macOS 上除 neovim 外一般都已自带。
 
 macOS：
 
