@@ -45,7 +45,7 @@ brew install neovim ripgrep   # unzip 系统自带，不用装
 > macOS 自带 `unzip`（mason 解压 zip 工具包要用），但**不自带 `ripgrep`**（telescope 全文搜索要用），
 > gcc/make 由 Xcode CLT 提供，`brew install neovim` 时会一并提示安装。
 
-Linux（含 WSL）：发行版源里的 neovim 普遍偏旧，用官方 tarball：
+Linux（含 WSL）：发行版源里的 neovim 普遍偏旧，可手动用官方 tarball（备用 / 学习用途）：
 
 ```bash
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
@@ -65,7 +65,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/mai
 
 会改动：`~/.zshenv` 追加 `EDITOR`/`VISUAL`，`~/.zshrc` 追加 `alias vim/vi`。重复执行安全。
 
-### 4. （可选）用仓库脚本安装/升级（推荐）
+### （推荐方式）用 dot-config 脚本安装/升级（支持 x86_64 / arm64，版本可选）
 
 ```bash
 sudo bash ./neovim/neovim-install.sh
