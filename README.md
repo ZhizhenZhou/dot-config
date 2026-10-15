@@ -29,12 +29,20 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/mai
 ### neovim（前置：nvim >= 0.10，见 [neovim/README.md](./neovim/README.md)）
 
 ```bash
+# 安装 neovim（询问安装目录；回车 = /usr/local/nvim）
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/neovim/neovim-install.sh)"
+# 装到用户目录、不需要 sudo：
+# NVIM_INSTALL_DIR=~/.local/opt/nvim NVIM_BIN_DIR=~/.local/bin \
+#   bash -c "$(curl -fsSL .../neovim/neovim-install.sh)"
+
 # alias 进 ~/.zshrc；EDITOR/VISUAL 进 ~/.zshenv（已存在则跳过）
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/neovim/nvim_config.sh)"
 
 # 拉取配置本体
 git clone https://github.com/ZhizhenZhou/neovim-config.git ~/.config/nvim/
 ```
+
+> 脚本完整说明（路径优先级、退出码、故障排查）见 [neovim/README.md](./neovim/README.md)。
 
 ### ssh（模板，需手动填值，见 [ssh/README.md](./ssh/README.md)）
 
