@@ -8,6 +8,7 @@
 | 文件 | 作用 | 幂等 |
 |---|---|---|
 | `nvim_config.sh` | `EDITOR`/`VISUAL` → `~/.zshenv`；`alias vim/vi` → `~/.zshrc`。已存在的行跳过 | ✓ |
+| `neovim-install.sh` | 通用 tarball 安装 / 升级 脚本（支持 x86_64 / arm64，版本可选） | ✓ |
 
 ## 前置要求
 
@@ -63,6 +64,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/mai
 ```
 
 会改动：`~/.zshenv` 追加 `EDITOR`/`VISUAL`，`~/.zshrc` 追加 `alias vim/vi`。重复执行安全。
+
+### 4. （可选）用仓库脚本安装/升级（推荐）
+
+```bash
+sudo bash ./neovim/neovim-install.sh
+# 指定版本：
+sudo NVIM_VERSION=v0.12.6 bash ./neovim/neovim-install.sh
+```
+
+支持 `x86_64` 和 `aarch64`/`arm64`；代理应事先自行设置 `https_proxy`。
 
 ### 3. 拉取配置本体
 
