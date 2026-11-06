@@ -18,7 +18,9 @@ macOS / Linux(WSL)。Windows 不支持。需要 `curl`、`git`、`tar`；macOS �
 
 ## 验收
 
-- `nvim --version` ≥ 0.12（配置依赖 nvim-treesitter 的 `main` 分支）
+- `nvim --version` ≥ 0.12（配置依赖 nvim-treesitter 的 `main` 分支）。
+  不达标就换掉，不要改配置去迁就它：brew 装的 `brew upgrade neovim`；
+  tarball 装的用 `NVIM_VERSION=latest` 重跑 `neovim/neovim-install.sh`
 - PATH 上只有一份 `nvim`（`command -v nvim` 与 `nvim --version` 指向同一处）
 - `zsh -lic true` 不报错
 
