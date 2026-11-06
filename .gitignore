@@ -1,12 +1,16 @@
 # 真实 SSH 配置：只保留模板 config.example 在仓库里
 ssh/config
 
-# 密钥与密码材料
+# 密钥与密码材料：名字带 pass 的文件一律忽略，但脚本和文档除外
+# （否则 ssh/askpass-*.sh、zsh/password.zsh 这类通用代码会被静默吞掉）
+*pass*
+!*.sh
+!*.zsh
+!*.md
 *.pem
 *.key
 id_*
 !*.pub
-*pass*
 *.enc
 # 文档不该被上面的通配符误伤（如 passwordless 指南）
 !*.md

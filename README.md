@@ -72,5 +72,5 @@ curl -L -o ~/.ssh/config https://raw.githubusercontent.com/ZhizhenZhou/dot-confi
 | [Nerd Font](https://www.nerdfonts.com/font-downloads)（Hack） | 任意 | zsh 主题图标、neovim 图标 |
 | node.js | >= 20（任意活跃 LTS，如 20/22/24） | neovim LSP |
 | miniconda | 最新 | Python 环境管理（个人习惯，非本仓库依赖） |
-| gcc / g++ | 系统源即可 | neovim treesitter 编译解析器 |
-| ripgrep | 系统源即可 | neovim telescope 全文搜索 |
+| gcc / g++ | macOS：Xcode CLT；Linux：系统源 | neovim treesitter 编译解析器 |
+| ripgrep | macOS：`brew install ripgrep`；Linux：系统源 | neovim telescope 全文搜索 |
