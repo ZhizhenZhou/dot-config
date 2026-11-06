@@ -8,6 +8,7 @@ zsh + oh-my-zsh 的安装与配置：两个插件、一个自定义主题、`~/.
 |---|---|---|
 | `install.sh` | 装插件 + 下主题 + 改 `~/.zshrc` | ✓ |
 | `zzz.zsh-theme` | 自定义主题（极简 prompt + 右侧返回码/时间） | — |
+| `proxy.zsh` | 可选：终端代理开关，填 `PROXY_PORT` 后 source 进 `~/.zshrc` | — |
 
 ## Quick start
 
