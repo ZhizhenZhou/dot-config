@@ -5,22 +5,27 @@
 
 ---
 
-## 1. 安装方式：官方 tarball
+## 1. 安装方式
 
-Neovim 我们统一用**官方 release 的 tarball** 安装，不走包管理器：
+**有 agent 时（主路径）**：见仓库根目录 [AGENTS.md](../AGENTS.md)，由 agent 按平台自己选安装方式，
+只要求结果满足 0.12+、PATH 上只有一份 nvim。
+
+**没有 agent 时（兜底）**：用本目录的 `neovim-install.sh`，官方 tarball 一条命令装完。各方式对比：
 
 | 方式 | 结论 | 原因 |
 |---|---|---|
-| **官方 tarball** | ✅ 采用 | 版本可控（要 0.10+）、x86_64 / arm64 同一套逻辑、升级 = 重跑一次、产物是普通目录好管理 |
-| `apt install neovim` | ❌ | 发行版源版本普遍偏旧，拿不到 0.10+，且各发行版版本不一致 |
-| `brew install neovim` | ❌ | 仅 macOS；本仓库要在 macOS / Linux(WSL) 之间共用同一套引导 |
+| **官方 tarball** | ✅ 兜底 | 跨 macOS / Linux 同一套逻辑、可用 `NVIM_VERSION` 锁版本、产物是普通目录好管理 |
+| `brew install neovim` | ⭕ macOS 可选 | brew 当前也是 0.12.x，PATH 与升级交给 brew 更省事；但配置绑 0.12，`brew upgrade` 可能升到不兼容版本，必要时 `brew pin neovim`；别和 tarball 版并存 |
+| `apt install neovim` | ❌ | 发行版源版本普遍偏旧，拿不到 0.12 |
 | AppImage | ❌ | 依赖 FUSE，WSL 内常常没装，跑不起来还要额外排错 |
 | `nix profile` | ❌ | 引入一整套 Nix 体系，超出这个仓库的范围 |
 
 安装布局：解压后的目录放到一个自选位置（默认 `/usr/local/nvim`），再在 `bin` 目录里放一个
 `nvim` 软链接指过去。这样"装哪"和"PATH 里怎么找到它"两件事解耦，换目录也不用动 PATH。
 
-> 版本要求：**>= 0.10**（实测 0.12）。neovim-config 用了 0.10 才有的 API。
+> 版本要求：**>= 0.12**。neovim-config 依赖 nvim-treesitter 的 `main` 分支，对应 Neovim 0.12。
+
+> 平台：macOS / Linux（arm64、x86_64）。Windows 不支持，发布物是 zip/msi。
 
 ---
 
@@ -168,15 +173,20 @@ rm -f /usr/local/bin/nvim       # 或你的 NVIM_BIN_DIR/nvim
 
 | 现象 | 原因 / 处理 |
 |---|---|
-| `Unsupported architecture: ...` | 脚本只支持 x86_64 与 arm64 |
+| `Unsupported OS: ...` | 只支持 macOS 与 Linux；Windows 用 `.zip`，不在本脚本范围 |
+| `Unsupported architecture: ...` | 只支持 arm64 与 x86_64 |
+| `No release asset matched ...` | 上游改了产物命名，按提示去 releases 页面核对后更新脚本里的资产表 |
+| `Downloaded binary cannot run on ...` | 下到了错误平台的包（冒烟测试兜住了），已安装的不会被动到 |
 | `Need write access to ... Re-run with sudo` | 目标目录不可写且系统没有 `sudo`，改用用户目录或手动加 sudo |
 | `curl: (35) ...` | 到 `github.com` 的连接被掐，先 `export https_proxy=...` 再跑 |
 | `Could not locate extracted Neovim directory` | 下载到的东西不是预期 tarball，清缓存后重试 |
 | 装完 `nvim --version` 仍是旧版本 | PATH 上有另一份 nvim 抢在前面，按脚本提示删旧的或调 PATH 顺序 |
+| `warning: ... < 0.12` | 装到的版本低于配置要求，换 `NVIM_VERSION` 或升级 |
 | `spawn: unzip failed`（nvim 里） | 系统缺 `unzip`，mason 装不了 zip 包 |
 | treesitter 首开报错 | 系统缺 `gcc` / `make` |
 
-> 产物命名说明：`nvim-linux-x86_64` 是 0.12 起的命名，老版本叫 `nvim-linux64`。脚本两种都能处理。
+> 产物命名说明：当前是 `nvim-<macos|linux>-<arm64|x86_64>.tar.gz`；0.10 之前叫 `nvim-linux64.tar.gz` /
+> `nvim-macos.tar.gz`。脚本按候选名依次尝试，两种都能处理。
 
 ### 3.2 `nvim_config.sh`
 
