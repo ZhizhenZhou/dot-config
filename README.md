@@ -15,6 +15,11 @@ macOS / Linux(WSL) 个人环境的引导配置：zsh、neovim、ssh。
 └── .gitignore    阻止真实 ssh 配置与密钥材料入库
 ```
 
+## 网络
+
+终端代理开关模板：[zsh/proxy.zsh](./zsh/proxy.zsh)。填好 `PROXY_PORT`，追加到 `~/.zshrc` 末尾或直接 `source` 它。
+端口是机器相关的值，不要提交进本仓库。
+
 ## Quick start
 
 ### zsh（前置：oh-my-zsh 已安装，见 [zsh/README.md](./zsh/README.md)）
