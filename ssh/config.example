@@ -44,7 +44,9 @@ Host work-b
     User <shared-account>
     ProxyCommand ssh -W %h:%p gateway
     ControlMaster auto
-    ControlPath ~/.ssh/control-%r@%h:%p
+    # %C = 对 user/host/port 取哈希，避免长主机名撞上 macOS 的 Unix socket 路径上限（104 字节）
+    # 需要 OpenSSH 6.7+；同时保证 ~/.ssh/control 目录存在
+    ControlPath ~/.ssh/control/%C
     ControlPersist yes
     ServerAliveInterval 120
     ServerAliveCountMax 5
