@@ -10,6 +10,12 @@
 #
 # 见 ssh-passwordless-setup.md 了解 SSH_ASKPASS 的完整接线方式。
 
+[ "$(uname -s)" = "Darwin" ] || {
+    printf 'askpass-keychain.sh 只支持 macOS（依赖 security 命令）。\n' >&2
+    printf 'Linux 请用 secret-tool / 文件方案，见 ssh-passwordless-setup.md。\n' >&2
+    exit 1
+}
+
 security find-generic-password \
     -a "${SSH_KEYCHAIN_ACCOUNT:?set SSH_KEYCHAIN_ACCOUNT}" \
     -s "${SSH_KEYCHAIN_SERVICE:?set SSH_KEYCHAIN_SERVICE}" \

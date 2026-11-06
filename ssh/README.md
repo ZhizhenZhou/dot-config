@@ -21,7 +21,7 @@ $EDITOR ~/.ssh/config
 ### SSH 免密登录（密码自动填充）— 仅在无法用公钥时
 某些机器（共享账号、没权限写 `authorized_keys`）只能用密码。这时用 `SSH_ASKPASS` 把密码交给系统级安全存储（macOS Keychain / GNOME Keyring / Windows DPAPI），而不是写在脚本或 dotfile 里。
 
-需要 `askpass-keychain.sh`（从 macOS Keychain 取密码），并在 `~/.zshenv` 里设置两个环境变量（Keychain 记录的账户名与服务名）：
+需要 `askpass-keychain.sh`（**仅 macOS**，依赖 `security`；Linux 用 `secret-tool`，见下文指南），并在 `~/.zshenv` 里设置两个环境变量（Keychain 记录的账户名与服务名）：
 ```
 curl -L -o ~/.ssh/askpass-keychain.sh https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/ssh/askpass-keychain.sh
 chmod 700 ~/.ssh/askpass-keychain.sh
