@@ -38,7 +38,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ZhizhenZhou/dot-config/mai
 |---|---|---|
 | `$ZSH_CUSTOM/plugins/` | clone `zsh-autosuggestions`、`zsh-syntax-highlighting` | 已存在则跳过 |
 | `$ZSH_CUSTOM/themes/zzz.zsh-theme` | 从本仓库下载 | 每次覆盖，保持同步 |
-| `~/.zshrc` | 改写 `ZSH_THEME` 与 `plugins=` 两行 | 已配置则跳过；首次改写前备份为 `~/.zshrc.bak` |
+| `$ZDOTDIR/.zshrc`（默认 `~/.zshrc`） | 改写 `ZSH_THEME` 与 `plugins=` 两行 | 已配置则跳过；改写前备份为 `.zshrc.bak.<时间戳>` |
 
 ### 4. （可选）本机隐藏 prompt 的用户名
 
@@ -62,4 +62,4 @@ echo "export PROMPT_HIDE_USER=1" >> ~/.zshenv    # 不要把这一行提交进�
 
 - 主题图标乱码 → 终端没设 Nerd Font，见根 [README](../README.md)
 - 改完不生效 → `exec zsh` 或重开终端
-- 想撤销配置 → 恢复 `~/.zshrc.bak`，删 `$ZSH_CUSTOM/plugins/` 下两个目录和 `themes/zzz.zsh-theme`
+- 想撤销配置 → 恢复 `~/.zshrc.bak.<时间戳>`，删 `$ZSH_CUSTOM/plugins/` 下两个目录和 `themes/zzz.zsh-theme`

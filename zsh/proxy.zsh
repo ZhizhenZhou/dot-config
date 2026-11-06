@@ -13,12 +13,17 @@ _proxy_on() {
   export https_proxy="http://127.0.0.1:$PROXY_PORT"
   export http_proxy="$https_proxy"
   export all_proxy="socks5://127.0.0.1:$PROXY_PORT"
+  # 大小写都设：Go / npm / 部分 Java 工具只读大写，curl 则刻意忽略 HTTP_PROXY
+  export HTTPS_PROXY="$https_proxy"
+  export HTTP_PROXY="$http_proxy"
+  export ALL_PROXY="$all_proxy"
   export no_proxy="127.0.0.1,localhost"
   export NO_PROXY="$no_proxy"
 }
 
 proxy_off() {
   unset https_proxy http_proxy all_proxy no_proxy NO_PROXY
+  unset HTTPS_PROXY HTTP_PROXY ALL_PROXY
 }
 
 # 端口确实在监听才自动开；没装 nc 时只定义函数，需要时手动 _proxy_on
