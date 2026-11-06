@@ -163,7 +163,8 @@ tar xzf "$ASSET"
 EXTRACTED_DIR="${ASSET%.tar.gz}"
 if [[ ! -d "$EXTRACTED_DIR" ]]; then
   # Fallback for upstream directory naming changes.
-  EXTRACTED_DIR="$(find "$WORKDIR" -mindepth 1 -maxdepth 1 -type d | head -n1)"
+  # head 提前退出会让 find 收到 SIGPIPE，在 pipefail 下被当成失败，这里兜住
+  EXTRACTED_DIR="$(find "$WORKDIR" -mindepth 1 -maxdepth 1 -type d | head -n1 || true)"
 fi
 if [[ -z "${EXTRACTED_DIR:-}" || ! -d "$EXTRACTED_DIR" ]]; then
   echo "Could not locate extracted Neovim directory."
@@ -196,11 +197,27 @@ case "$installed_ver" in
   *) printf 'warning: %s < 0.12, this config expects 0.12+\n' "$installed_ver" >&2 ;;
 esac
 
+# 解析软链接链并规范化路径。BSD 的 readlink 不支持 -f（旧版 macOS 会报
+# "illegal option -- f"），这里只用 POSIX 的 readlink，避免安装成功后脚本异常退出。
+resolve_path() {
+  _p=$1
+  while [ -L "$_p" ]; do
+    _t=$(readlink "$_p" 2>/dev/null || true)
+    [ -n "$_t" ] || break
+    case $_t in
+      /*) _p=$_t ;;
+      *)  _p=$(dirname "$_p")/$_t ;;
+    esac
+  done
+  ( cd "$(dirname "$_p")" 2>/dev/null && printf '%s/%s\n' "$(pwd)" "$(basename "$_p")" ) \
+    || printf '%s\n' "$_p"
+}
+
 # PATH 里有另一份 nvim 且优先级更高时提醒，避免装出第二份互相盖
-resolved_new=$(readlink -f "$BIN_DIR/nvim")
+resolved_new=$(resolve_path "$BIN_DIR/nvim")
 other_nvim=$(command -v nvim 2>/dev/null || true)
 if [ -n "$other_nvim" ]; then
-  resolved_other=$(readlink -f "$other_nvim")
+  resolved_other=$(resolve_path "$other_nvim")
   if [ "$resolved_other" != "$resolved_new" ]; then
     printf '\nwarning: another nvim is on PATH at %s -> %s\n' \
       "$other_nvim" "$resolved_other" >&2
