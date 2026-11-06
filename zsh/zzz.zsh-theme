@@ -1,4 +1,4 @@
-# 在你自己的机器上隐藏 %n：在 ~/.zshenv 里 export PROMPT_HIDE_USER=1（不要把这个值提交到仓库）
+# 隐藏 用户名@主机名 前缀：在 ~/.zshenv 里 export PROMPT_HIDE_USER=1（不要把这个值提交到仓库）
 if [ -n "$PROMPT_HIDE_USER" ]; then
   PROMPT=''
 else
