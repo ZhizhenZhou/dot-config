@@ -7,8 +7,7 @@
 #   3. PATH               仅当前 shell（打印 export 提示），不写任何 dotfile
 #
 # 支持平台：macOS / Linux（arm64、x86_64）。Windows 不支持（发布物是 zip/msi）。
-# 定位：没有 agent 时的兜底实现。有 agent 时由 AGENTS.md 让它按平台自选方式安装，
-# 本脚本只保证「无判断能力时也能装对架构、不会装坏」。
+# 定位：包管理器拿不到最新版时的兜底实现，只保证装对架构、不会装坏。
 #
 # Usage:
 #   bash neovim-install.sh                              # 交互式询问安装目录

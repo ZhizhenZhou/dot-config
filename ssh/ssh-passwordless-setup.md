@@ -46,15 +46,8 @@ ControlMaster auto / ControlPersist yes
 # 存（替换 <username> 和 <server> 为实际值）
 security add-generic-password -a <username> -s <server> -w
 
-# askpass 脚本：账号/服务名走环境变量，脚本本身不含任何身份信息
-# 仓库版见 ssh/askpass-keychain.sh
-cat > ~/.ssh/askpass-keychain.sh << 'EOF'
-#!/bin/sh
-security find-generic-password \
-    -a "${SSH_KEYCHAIN_ACCOUNT:?set SSH_KEYCHAIN_ACCOUNT}" \
-    -s "${SSH_KEYCHAIN_SERVICE:?set SSH_KEYCHAIN_SERVICE}" \
-    -w 2>/dev/null
-EOF
+# askpass 脚本（仓库版）
+curl -L -o ~/.ssh/askpass-keychain.sh https://raw.githubusercontent.com/ZhizhenZhou/dot-config/main/ssh/askpass-keychain.sh
 chmod 700 ~/.ssh/askpass-keychain.sh
 ```
 

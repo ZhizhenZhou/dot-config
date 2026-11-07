@@ -2,7 +2,7 @@
 ssh/config
 
 # 密钥与密码材料：名字带 pass 的文件一律忽略，但脚本和文档除外
-# （否则 ssh/askpass-*.sh、zsh/password.zsh 这类通用代码会被静默吞掉）
+# （否则 ssh/askpass-*.sh 这类通用代码会被静默吞掉）
 *pass*
 !*.sh
 !*.zsh
