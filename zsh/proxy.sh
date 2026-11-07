@@ -2,12 +2,12 @@
 #
 # 用法：
 #   1. 把 PROXY_PORT 改成你本机代理客户端监听的端口
-#   2. 追加到 ~/.zshrc 末尾，或在 ~/.zshrc 里 source 本文件
+#   2. 在 ~/.zshrc（或 ~/.bashrc）里 source 本文件
 #   3. 新开终端；代理没启动时不会自动打开，需要时手动执行 _proxy_on
 #
-# 只影响交互式 zsh，不影响 sh/bash 脚本与 cron。
+# 只对 source 它的交互式 shell 生效，不影响非交互脚本与 cron。
 
-PROXY_PORT="${PROXY_PORT:-}"   # 例：7897
+PROXY_PORT="${PROXY_PORT:-}"   # 在 ~/.zshrc 里设置
 
 _proxy_on() {
   export https_proxy="http://127.0.0.1:$PROXY_PORT"
