@@ -43,3 +43,6 @@ PROXY_PORT=<代理端口>
 ```
 
 端口是本机值，不要提交进仓库。
+
+source 后可用 `proxy on` / `proxy off` / `proxy status` 手动切换；
+新开终端时代理端口在监听则自动开启。
