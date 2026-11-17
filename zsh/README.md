@@ -38,18 +38,14 @@ echo "export PROMPT_HIDE_USER=1" >> ~/.zshenv
 在 `~/.zshrc` 末尾加（路径按实际位置替换）：
 
 ```bash
-PROXY_PORT=<代理端口>
+PROXY_PORTS="<端口1> <端口2>"   # 只有一个端口就写一个
 [ -f <路径>/proxy.sh ] && source <路径>/proxy.sh
 ```
 
-端口是本机值，不要提交进仓库。
+代理端口是本机值，不要提交进仓库。
 
-同时用多个代理客户端（例如 v2ray + Clash，端口不同）时，改成候选列表，
-按顺序取第一个在监听的：
-
-```bash
-PROXY_PORTS="<端口1> <端口2>"
-```
+装了多个代理客户端（例如 v2ray + Clash）时把端口都列进来，
+按顺序取第一个在监听的。
 
 可用命令：
 

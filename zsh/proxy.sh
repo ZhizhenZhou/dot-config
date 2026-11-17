@@ -1,16 +1,14 @@
 # 终端代理开关（macOS / Linux 通用，可选组件）
 #
 # 用法：
-#   1. 设置代理端口（建议放 ~/.zshenv，本机值不进仓库）：
-#        PROXY_PORT=<端口>              # 固定端口
-#        PROXY_PORTS="<端口1> <端口2>"  # 候选端口，按顺序取第一个在监听的
+#   1. 设置候选端口（建议放 ~/.zshenv，本机值不进仓库）：
+#        PROXY_PORTS="<端口1> <端口2>"   # 按顺序取第一个在监听的；只有一个端口就写一个
 #   2. 在 ~/.zshrc（或 ~/.bashrc）里 source 本文件
 #   3. 新开终端：有候选端口在监听就自动开启，否则保持关闭
 #   4. 手动切换：proxy on [端口] / proxy off / proxy status
 #
 # 只对 source 它的交互式 shell 生效，不影响非交互脚本与 cron。
 
-PROXY_PORT="${PROXY_PORT:-}"
 PROXY_PORTS="${PROXY_PORTS:-}"
 
 # 端口是否在监听：优先 nc，没有 nc 时退回 bash 的 /dev/tcp（Linux）
@@ -22,14 +20,10 @@ _port_live() {
   fi
 }
 
-# 选端口：显式参数 > 固定 PROXY_PORT（在监听）> PROXY_PORTS 里第一个在监听的
+# 选端口：显式参数 > PROXY_PORTS 里第一个在监听的
 _pick_port() {
   if [ -n "${1:-}" ]; then
     printf '%s\n' "$1"
-    return 0
-  fi
-  if [ -n "$PROXY_PORT" ] && _port_live "$PROXY_PORT"; then
-    printf '%s\n' "$PROXY_PORT"
     return 0
   fi
   for _pp in $(printf '%s\n' "$PROXY_PORTS"); do
@@ -43,8 +37,7 @@ _pick_port() {
 
 _proxy_on() {
   _port=$(_pick_port "${1:-}") || {
-    printf '没有代理端口在监听（PROXY_PORT=%s，PROXY_PORTS=%s）。\n' \
-      "${PROXY_PORT:-<未设>}" "${PROXY_PORTS:-<未设>}" >&2
+    printf '没有代理端口在监听（PROXY_PORTS=%s）。\n' "${PROXY_PORTS:-<未设>}" >&2
     printf '代理客户端启动后重试，或用 proxy on <端口> 指定。\n' >&2
     return 1
   }
@@ -87,7 +80,7 @@ proxy() {
         printf 'proxy OFF\n'
       fi
       _seen=""
-      for _pp in $(printf '%s\n' "$PROXY_PORT" "$PROXY_PORTS"); do
+      for _pp in $(printf '%s\n' "$PROXY_PORTS"); do
         case " $_seen " in *" $_pp "*) continue ;; esac
         _seen="$_seen $_pp"
         if _port_live "$_pp"; then
